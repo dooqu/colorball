@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html style="height:100%">
+
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
+</head>
+<body>
+<script>
+		var config = {
+			type: Phaser.AUTO,
+			width: 720,
+			height: 1140,
+			parent: document.body,
+			fps: { target: 24 },
+			scene: {
+				image : null,
+				preload: preload,
+				create: create,
+				update: update
+			}
+		};
+
+		var game = new Phaser.Game(config);
+
+function preload() {
+	this.load.spritesheet('blueballsheet', 'BlueBall.png', { frameWidth: 48, frameHeight: 48 });
+	this.load.spritesheet('yellowballsheet', 'YellowBall.png', { frameWidth: 48, frameHeight: 48 });
+}
+
+function create() {
+	this.image = this.add.image(100, 100, "blueballsheet", 1);
+	this.imageDest = this.add.image(140, 140, "yellowballsheet", 1);
+	this.input.on("pointerdown", function(event) {
+		var r1 = Phaser.Math.Angle.Between(this.image.x, this.image.y, event.x, event.y);
+		var a1 = Phaser.Math.RadToDeg(r1);
+
+		this.image.angle = a1;
+		this.imageDest.angle = a1;
+
+		var point = new Phaser.Geom.Point(this.image.x + 50, this.image.y);
+		var rotationPoint = Phaser.Math.RotateAround(point,this.image.x, this.image.y, Phaser.Math.DegToRad(a1));
+
+		this.imageDest.x = rotationPoint.x;
+		this.imageDest.y = rotationPoint.y;
+
+	}, this);
+}
+
+function update() {
+}
+</script>
+</body>
+</html>

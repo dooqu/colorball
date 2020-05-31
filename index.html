@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html style="height:100%">
+
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
+	<script src="Utils.js"></script>
+	<script src="BallGroup.js"></script>
+	<script src="LinkedBall.js"></script>
+	<script src="Turret.js"></script>
+	<script src="LineBallManager.js"></script>
+	<script src="MainGameScene.js"></script>
+</head>
+
+<body style="width:100%;height:100%;border:1px solid red">
+	<script>
+		var config = {
+			type: Phaser.AUTO,
+			width: 720,
+			height: 1140,
+			parent: document.body,
+			physics: {
+				default: 'arcade',
+				arcade: {
+					debug: true
+				}
+			},
+			scene: [MainGameScene]
+		};
+
+		var game = new Phaser.Game(config);
+	</script>
+</body>
+
+</html>
